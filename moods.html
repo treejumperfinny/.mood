@@ -27,7 +27,7 @@
       or not! That's completly fine too. Emotions are never what we expect them to be, and life is full of different
       kinds of emotions. Never be afraid to feel.</p>
       <br></br>
-      <img class="welcome" src="images/eyes_mood0.png" />
+      <img class="welcome" src="eyes_mood0.png" />
   </section>
 
   <section id="daily-words">
@@ -120,14 +120,17 @@
 
     </div>
     <br></br>
+    <form action="entry" method="post" id="assScore">
     <p>Time to Score!</p>
     <div id="scoring">
       <label for="asses">Assessment Score</label>
-      <input for="quiz-score" id="score" placeholder="Don't lie here. You'll only lie to yourself!" />
+      <input type="number" for="quiz-score" id="score" max = '25' placeholder="Don't lie here. You'll only lie to yourself!" />
       <label for="start">Assessment date:</label>
-      <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2099-12-31">
+      <input type="date" id="start" name="trip-start" value="2022-05-01" min="2018-01-01" max="2099-12-31">
       <button type="submit" class="buttonround" id="log-button">Submit Score</button>
+      <div id="pastQuizes"></div>
     </div>
+    </form>
   </section>
 
     <section id="mood-entry">
@@ -143,12 +146,10 @@
           <input for="title" id="DOTW" placeholder="The day was?" />
           <p>The stage is set. It is all yours. Take it away!</p>
           <label for="entry">Speak on your mood.</label>
-          <textarea id="entry" name="text-entry" placeholder=" What are you feeling?"></textarea>
+          <input id="entry" name="text-entry" placeholder=" What are you feeling?"></input>
         </div>
         <button type="submit" class="buttonround" id="log-button">Log Entry</button>
-      <audio 
-        id="audio-Treasure"
-        src="C:\Users\jesse\Downloads\sound fx\sound fx\zelda_chest.mp3">
+      <audio id="audio-Treasure" src="C:\Users\jesse\Downloads\sound fx\sound fx\zelda_chest.mp3">
       </audio>
       </form>
     </section>

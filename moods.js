@@ -3,6 +3,8 @@ const searchBar = document.getElementById("searchBar");
 const searchBtn = document.getElementById("searchBtn");
 const pastEntriesId = document.getElementById("pastEntries");
 const logForm = document.querySelector("#short-diary");
+const assScore = document.getElementById("assScore");
+const pastQuizesTag = document.getElementById("pastQuizes");
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
@@ -20,9 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((moodEntryArr) => {
       pastEntries(moodEntryArr);
       searchFor(moodEntryArr);
+      pastQuizes(moodEntryArr);
     });
 });
 
+assScore.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const score = (document.querySelector("#score").innerText = parseInt(
+    e.target.score.value
+  ));
+  const date = (document.querySelector("#start").innerText =
+    e.target.start.value);
+  assScore.reset();
+  newAssFetch(date, score);
+});
 /////// Search Functionality /////////
 const searchFor = (moodEntryArr) => {
   searchBar.addEventListener("keyup", (e) => {
@@ -40,7 +53,7 @@ function displaySearchItems(searchableEntries) {
   pastEntriesId.innerHTML = "";
   pastEntries(searchableEntries);
 }
-
+//////////// Render Functions /////////////
 const pastEntries = (moodEntryArr) => {
   moodEntryArr.map((entry) => {
     const card = document.createElement("div");
@@ -54,6 +67,20 @@ const pastEntries = (moodEntryArr) => {
     p.innerText = entry.entry;
     card.append(h3, h4, p);
     pastEntriesId.append(card);
+  });
+};
+
+const pastQuizes = (moodEntryArr) => {
+  moodEntryArr.map((entry) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = "";
+    const h4 = document.createElement("h4");
+    h4.innerText = `Date: ${entry.date}`;
+    const h5 = document.createElement("h5");
+    h5.innerText = `Quiz Score: ${entry.quiz}`;
+    card.append(h4, h5);
+    pastQuizesTag.append(card);
   });
 };
 /////////// Render Quotes & Audio /////////////
@@ -101,6 +128,7 @@ logForm.addEventListener("submit", (e) => {
     e.target.DOTW.value);
   const newEntry = (document.querySelector("#entry").innerText =
     e.target.entry.value);
+  logForm.reset();
   newEntryFetch(newBlurb, newDay, newEntry);
 });
 function newEntryFetch(newBlurb, newDay, newEntry) {
@@ -119,6 +147,23 @@ function newEntryFetch(newBlurb, newDay, newEntry) {
     .then((response) => response.json())
     .then((data) => pastEntries([data]));
 }
+
+function newAssFetch(date, score) {
+  fetch("http://localhost:3000/entries", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      date: date,
+      quiz: score,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => pastQuizes([data]));
+}
+
 // let audioButtonAh = document.querySelector(".audio-button-Ah");
 // audioButtonAh.addEventListener("click", function () {
 //   var audio = document.getElementById("audio-Ah");

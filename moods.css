@@ -326,6 +326,7 @@ textarea {
 
 .buttonround:hover {
   background-color: #e29578;
+  cursor: pointer;
 }
 
 @media all and (max-width: 30em) {
