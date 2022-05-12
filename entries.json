@@ -1,0 +1,16 @@
+{
+    "entires":{
+        "id": 1,
+        "day": "Monday",
+        "blurb": "Moody Mondays",
+        "entry": "I tried to be happy that I was at work. But I forgot my lunch. I hate it.",
+        "quiz": 5
+    },
+    {
+        "id": 2,
+        "day": "Monday Night",
+        "blurb": "Moody Mondays Part 2",
+        "entry": "Really Sucks today...",
+        "quiz": 2
+    },
+}
